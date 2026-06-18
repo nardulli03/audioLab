@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>AudioLab</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    padding:30px;
+}
+
+/* ===== HEADER ===== */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.logo{
+    font-size:32px;
+    font-weight:bold;
+    color:#8b5cf6;
+}
+
+.sub{
+    color:#94a3b8;
+    margin-top:5px;
+}
+
+.user{
+    background:#1e293b;
+    padding:12px 18px;
+    border-radius:12px;
+}
+
+/* ===== GRID ===== */
+
+.grid{
+    display:grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap:25px;
+}
+
+/* ===== CARDS ===== */
+
+.card{
+    background:#111827;
+    border:1px solid #1f2937;
+    border-radius:24px;
+    padding:25px;
+    box-shadow:0 0 20px rgba(0,0,0,0.25);
+}
+
+.card h2{
+    margin-bottom:18px;
+    font-size:22px;
+}
+
+/* ===== WAVE ===== */
+
+.wave{
+    height:180px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#312e81,#7c3aed);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.wave::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,0.1) 0px,
+        rgba(255,255,255,0.1) 2px,
+        transparent 2px,
+        transparent 10px
+    );
+}
+
+.wave-text{
+    z-index:2;
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* ===== BUTTONS ===== */
+
+.buttons{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+}
+
+button{
+    border:none;
+    padding:14px 20px;
+    border-radius:14px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.primary{
+    background:#8b5cf6;
+    color:white;
+}
+
+.secondary{
+    background:#1e293b;
+    color:white;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+/* ===== SETTINGS ===== */
+
+.option{
+    margin-bottom:20px;
+}
+
+.option label{
+    display:block;
+    margin-bottom:10px;
+    color:#cbd5e1;
+}
+
+select{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    background:#1e293b;
+    color:white;
+}
+
+/* ===== MINI STATS ===== */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.stat{
+    background:#1e293b;
+    padding:18px;
+    border-radius:16px;
+}
+
+.stat h3{
+    color:#8b5cf6;
+    margin-bottom:8px;
+}
+
+/* ===== SPECTRUM ===== */
+
+.spectrum{
+    margin-top:20px;
+    height:160px;
+    border-radius:20px;
+    background:#0f172a;
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+    padding:20px;
+}
+
+.bar{
+    flex:1;
+    background:linear-gradient(to top,#8b5cf6,#38bdf8);
+    border-radius:10px 10px 0 0;
+}
+
+.bar:nth-child(1){height:40%;}
+.bar:nth-child(2){height:70%;}
+.bar:nth-child(3){height:55%;}
+.bar:nth-child(4){height:90%;}
+.bar:nth-child(5){height:60%;}
+.bar:nth-child(6){height:80%;}
+.bar:nth-child(7){height:45%;}
+.bar:nth-child(8){height:100%;}
+
+/* ===== EXPORT ===== */
+
+.export{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:900px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+            <div class="logo">AudioLab</div>
+            <div class="sub">
+                Conversor de Audio Analógico → Digital
+            </div>
+        </div>
+
+        <div class="user">
+            🎧 Proyecto DSP
+        </div>
+
+    </div>
+
+    <!-- GRID -->
+
+    <div class="grid">
+
+        <!-- LEFT -->
+
+        <div>
+
+            <!-- AUDIO INPUT -->
+
+            <div class="card">
+
+                <h2>Entrada de Audio</h2>
+
+                <div class="wave">
+                    <div class="wave-text">
+                        Forma de onda del audio
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="primary">🎤 Grabar</button>
+                    <button class="secondary">📁 Subir Archivo</button>
+                </div>
+
+                <div class="stats">
+
+                    <div class="stat">
+                        <h3>Formato</h3>
+                        <p>WAV</p>
+                    </div>
+
+                    <div class="stat">
+                        <h3>Duración</h3>
+                        <p>00:43</p>
+                    </div>
+
+                    <div class="stat">
+                        <h3>Tamaño</h3>
+                        <p>4.8 MB</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- SPECTRUM -->
+
+            <div class="card" style="margin-top:25px;">
+
+                <h2>Espectro de Frecuencia</h2>
+
+                <div class="spectrum">
+
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div>
+
+            <!-- SETTINGS -->
+
+            <div class="card">
+
+                <h2>Configuración Digital</h2>
+
+                <div class="option">
+                    <label>Tasa de Muestreo</label>
+
+                    <select>
+                        <option>8 kHz</option>
+                        <option>16 kHz</option>
+                        <option selected>44.1 kHz</option>
+                        <option>96 kHz</option>
+                    </select>
+                </div>
+
+                <div class="option">
+                    <label>Profundidad de Bits</label>
+
+                    <select>
+                        <option>8 bits</option>
+                        <option selected>16 bits</option>
+                        <option>24 bits</option>
+                    </select>
+                </div>
+
+                <div class="option">
+                    <label>Formato de Exportación</label>
+
+                    <select>
+                        <option>MP3</option>
+                        <option>WAV</option>
+                    </select>
+                </div>
+
+                <div class="buttons">
+                    <button class="primary">
+                        ⚡ Convertir Audio
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- RESULT -->
+
+            <div class="card" style="margin-top:25px;">
+
+                <h2>Resultado</h2>
+
+                <p style="color:#94a3b8; line-height:1.7;">
+                    El audio fue digitalizado correctamente.
+                    Se aplicó una frecuencia de muestreo de
+                    44.1 kHz y cuantización de 16 bits.
+                </p>
+
+                <div class="export">
+                    <button class="secondary">⬇ WAV</button>
+                    <button class="secondary">⬇ MP3</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
